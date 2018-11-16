@@ -27,7 +27,7 @@ namespace OptimalNutritionConsole
 
         static void Main(string[] args)
         {
-            RootObject jsonDeserialized = DeserializeJson(jsonExample2WithError);
+            USDARoot jsonDeserialized = DeserializeJson(jsonExample2WithError);
             //   ExecuteGetFromRestApi();
             //GetJsonDynamicFromRestAPI();
             Console.ReadLine();
@@ -45,7 +45,7 @@ namespace OptimalNutritionConsole
             HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
-                var dataObjects = response.Content.ReadAsAsync<IEnumerable<RootObject>>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+                var dataObjects = response.Content.ReadAsAsync<IEnumerable<USDARoot>>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
                 Console.WriteLine();
                 //var dataObjects = response.Content.ReadAsAsync<DataObject>().Result.foods.ToString();
 
@@ -92,15 +92,15 @@ namespace OptimalNutritionConsole
             client.Dispose();
         }
 
-        private static RootObject DeserializeJson(string inputJson)
+        private static USDARoot DeserializeJson(string inputJson)
         {
             try
             {
                 using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(inputJson)))  
                 {  
                    // Deserialization from JSON  
-                   DataContractJsonSerializer deserializer = new DataContractJsonSerializer(typeof(RootObject));
-                    RootObject jsonObject = (RootObject)deserializer.ReadObject(ms);
+                   DataContractJsonSerializer deserializer = new DataContractJsonSerializer(typeof(USDARoot));
+                    USDARoot jsonObject = (USDARoot)deserializer.ReadObject(ms);
                     return jsonObject;
                 }
             }

@@ -27,7 +27,7 @@ namespace OptimalNutritionConsole.Models
         public List<object> measures { get; set; }
     }
 
-    public class Food2
+    public class FoodData
     {
         public string sr { get; set; }
         public string type { get; set; }
@@ -38,11 +38,11 @@ namespace OptimalNutritionConsole.Models
 
     public class Food
     {
-        public Food2 food { get; set; }
+        public FoodData food { get; set; }
         public string error { get; set; }
     }
 
-    public class RootObject
+    public class USDARoot
     {
         [JsonProperty("foods")]
         public List<Food> foods { get; set; }
